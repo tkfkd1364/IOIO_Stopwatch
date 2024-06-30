@@ -8,6 +8,9 @@
 import SwiftUI
 
 struct MainView: View{
+  // var stopwatchManger: StopwatchManager
+  var stopwatchManager: StopwatchManager
+  
   var  body: some View{
     VStack{
       // 시간
@@ -16,31 +19,49 @@ struct MainView: View{
       
       // 버튼
       HStack(spacing: 120){
-        // Lap <-> Reset Button
+        // MARK: Lap <-> Reset Button
         Button(
           action: {
-            print("clicked LapReset")
+            if stopwatchManager.mode == .reset{
+              stopwatchManager.lapOrReset()
+              print("this mode is reset")
+            } else if stopwatchManager.mode == .running {
+              stopwatchManager.lapOrReset()
+              print("this mode is running")
+            } else {
+              stopwatchManager.lapOrReset()
+              print("this mode is stop")
+            }
           },
           label: {
-            LapResetView()
+            LapResetView(mode: stopwatchManager.mode)
           }
         )
         .padding(.leading, 16)
         
-        // Start <-> Stop Button
+        // MARK: Start <-> Stop Button
         Button(
           action: {
-            print("clicked StartStop")
+            if stopwatchManager.mode == .reset {
+              stopwatchManager.startOrStop()
+              print("this mode is reset")
+            } else if stopwatchManager.mode == .running {
+              stopwatchManager.startOrStop()
+              print("this mode is running")
+            } else {
+              stopwatchManager.startOrStop()
+              print("this mode is stop")
+            }
           },
           label: {
-            StartStopView()
+            StartStopView(mode: stopwatchManager.mode)
           }
         )
         .padding(.trailing, 16)
       }
       .padding(.bottom, 16)
       
-      // Lap 기록
+      // MARK: Lap 기록
       Divider()
         .background(Color.red)
         .padding(.leading, 16)
@@ -55,6 +76,6 @@ struct MainView: View{
 }
 
 #Preview {
-  MainView()
+  MainView(stopwatchManager: StopwatchManager())
 }
 

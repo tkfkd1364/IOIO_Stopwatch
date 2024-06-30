@@ -13,12 +13,16 @@ struct LapListView: View{
       HStack{
         Text("Lap1")
           .foregroundStyle(.blue)
+          .font(.title3)
+          .fontWeight(.medium)
           .padding(.leading, 16)
         
         Spacer()
         
         Text("00:00.00")
           .foregroundStyle(.blue)
+          .font(.title3)
+          .fontWeight(.medium)
           .padding(.trailing, 16)
       }
       

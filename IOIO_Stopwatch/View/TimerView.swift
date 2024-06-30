@@ -12,6 +12,7 @@ struct TimerView: View {
     Text("00:00.00")
       .foregroundStyle(.gray)
       .font(.system(size: 86, weight: .light))
+
   }
 }
 

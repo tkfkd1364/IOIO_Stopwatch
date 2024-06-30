@@ -8,19 +8,43 @@
 import SwiftUI
 
 struct LapResetView: View{
+  var mode: StopwatchManager.Mode
+  
   var body: some View{
-    Circle()
-      .foregroundColor(.gray.opacity(0.3))
-      .overlay{
-        Text("Lap")
-          .foregroundColor(.gray)
-          .font(.title2)
-          .fontWeight(.medium)
-          .foregroundStyle(.black)
-      }
+    if mode == .reset {
+      Circle()
+        .foregroundColor(.gray.opacity(0.2))
+        .overlay{
+          Text("Lap")
+            .foregroundColor(.gray)
+            .font(.title2)
+            .fontWeight(.medium)
+            .foregroundStyle(.black)
+        }
+    } else if mode == .running {
+      Circle()
+        .foregroundColor(.gray.opacity(0.3))
+        .overlay{
+          Text("Lap")
+            .foregroundColor(.white)
+            .font(.title2)
+            .fontWeight(.medium)
+            .foregroundStyle(.black)
+        }
+    } else {
+      Circle()
+        .foregroundColor(.gray.opacity(0.3))
+        .overlay{
+          Text("Reset")
+            .foregroundColor(.white)
+            .font(.title2)
+            .fontWeight(.medium)
+            .foregroundStyle(.black)
+        }
+    }
   }
 }
 
 #Preview {
-  LapResetView()
+  LapResetView(mode: .running)
 }
