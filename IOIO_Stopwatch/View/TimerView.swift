@@ -8,14 +8,16 @@
 import SwiftUI
 
 struct TimerView: View {
+  var time: String
+  
   var body: some View {
-    Text("00:00.00")
-      .foregroundStyle(.gray)
+    Text("\(time)")
+      .foregroundStyle(.white)
       .font(.system(size: 86, weight: .light))
-
+      .monospacedDigit() // 숫자 폭 고정
   }
 }
 
 #Preview {
-  TimerView()
+  TimerView(time: "00:00.02")
 }

@@ -36,7 +36,6 @@ class StopwatchManager {
   }
 }
 
-
 // MARK: ddf
 extension StopwatchManager {
   func lapOrReset() {

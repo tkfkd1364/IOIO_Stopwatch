@@ -8,13 +8,12 @@
 import SwiftUI
 
 struct MainView: View{
-  // var stopwatchManger: StopwatchManager
   var stopwatchManager: StopwatchManager
   
   var  body: some View{
     VStack{
       // 시간
-      TimerView()
+      TimerView(time: stopwatchManager.stopwatch.runTime)
         .padding(.vertical, 80)
       
       // 버튼
@@ -22,16 +21,7 @@ struct MainView: View{
         // MARK: Lap <-> Reset Button
         Button(
           action: {
-            if stopwatchManager.mode == .reset{
-              stopwatchManager.lapOrReset()
-              print("this mode is reset")
-            } else if stopwatchManager.mode == .running {
-              stopwatchManager.lapOrReset()
-              print("this mode is running")
-            } else {
-              stopwatchManager.lapOrReset()
-              print("this mode is stop")
-            }
+            stopwatchManager.lapOrReset()
           },
           label: {
             LapResetView(mode: stopwatchManager.mode)
@@ -42,16 +32,7 @@ struct MainView: View{
         // MARK: Start <-> Stop Button
         Button(
           action: {
-            if stopwatchManager.mode == .reset {
-              stopwatchManager.startOrStop()
-              print("this mode is reset")
-            } else if stopwatchManager.mode == .running {
-              stopwatchManager.startOrStop()
-              print("this mode is running")
-            } else {
-              stopwatchManager.startOrStop()
-              print("this mode is stop")
-            }
+            stopwatchManager.startOrStop()
           },
           label: {
             StartStopView(mode: stopwatchManager.mode)
@@ -61,15 +42,19 @@ struct MainView: View{
       }
       .padding(.bottom, 16)
       
-      // MARK: Lap 기록
       Divider()
         .background(Color.red)
         .padding(.leading, 16)
         .padding(.bottom, 8)
       
-      LapListView()
+      // MARK: Lap List
+      ScrollView{
+        LapListView(lapTimes: stopwatchManager.stopwatch.lapTimes,
+                    currentLapTime: stopwatchManager.stopwatch.lapTime)
+      }
       
       Spacer()
+      
     }
     .background(Color(uiColor: .black))
   }
