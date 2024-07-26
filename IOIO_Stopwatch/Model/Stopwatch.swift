@@ -16,7 +16,7 @@ struct Stopwatch {
         return timeString(runningTime)
     }
 
-    var lapTime: String {           // 랩타임 경과시간(ms)를 문자열(mm:ss.SS)로 저장
+    var lapTime: String {         // 랩타임 경과시간(ms)를 문자열(mm:ss.SS)로 저장
         return timeString(lapRunningTime)
     }
 }

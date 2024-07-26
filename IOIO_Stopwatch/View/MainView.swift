@@ -7,21 +7,23 @@
 
 import SwiftUI
 
-struct MainView: View{
+struct MainView: View {
   var stopwatchManager: StopwatchManager
   
-  var  body: some View{
-    VStack{
+  var  body: some View {
+    VStack {
       // 시간
       TimerView(time: stopwatchManager.stopwatch.runTime)
         .padding(.vertical, 80)
       
       // 버튼
-      HStack(spacing: 120){
+      HStack(spacing: 120) {
         // MARK: Lap <-> Reset Button
         Button(
           action: {
             stopwatchManager.lapOrReset()
+            var sortedLap = stopwatchManager.stopwatch.lapTimes.sorted()
+            print(sortedLap)
           },
           label: {
             LapResetView(mode: stopwatchManager.mode)
@@ -43,13 +45,13 @@ struct MainView: View{
       .padding(.bottom, 16)
       
       Divider()
-        .background(Color.red)
+        .background(Color.white.opacity(0.3))
         .padding(.leading, 16)
         .padding(.bottom, 8)
       
       // MARK: Lap List
-      ScrollView{
-        LapListView(lapTimes: stopwatchManager.stopwatch.lapTimes,
+      ScrollView {
+        LapListView(mode: stopwatchManager.mode, lapTimes: stopwatchManager.stopwatch.lapTimes,
                     currentLapTime: stopwatchManager.stopwatch.lapTime)
       }
       

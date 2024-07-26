@@ -29,7 +29,7 @@ class StopwatchManager {
         self.startTimer()   // 타이머 시작
         break
       case .stop:
-        self.stopTimer()   // 타이머 중지
+        self.stopTimer()  // 타이머 중지
         break
       }
     }
@@ -52,20 +52,17 @@ extension StopwatchManager {
   func startOrStop() {
     switch mode {
     case .reset:
-      print("startOrStop_reset")
       self.startStopwatch()
     case .running:
-      print("startOrStop_running")
       self.stopStopwatch()
     case .stop:
-      print("startOrStop_stop")
       self.startStopwatch()
     }
   }
 }
 
 // MARK: dfd
-extension StopwatchManager {
+private extension StopwatchManager {
   func resetStopwatch() {
     self.mode = .reset
   }
@@ -85,7 +82,7 @@ extension StopwatchManager {
 }
 
 // MARK: dd
-extension StopwatchManager {
+private extension StopwatchManager {
   func resetTimer() {
     self.timer.invalidate()
     self.stopwatch.runningTime = 0.000

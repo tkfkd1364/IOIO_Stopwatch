@@ -8,40 +8,25 @@
 import SwiftUI
 
 struct LapListView: View{
+  var mode: StopwatchManager.Mode
   var lapTimes: [String]
   var currentLapTime: String
   
   var body: some View{
     VStack{
+      // if 문에 대해 고민해보기
+      if mode != .reset {
+        LapListContentView(lapTimes: lapTimes, index: lapTimes.count, time: currentLapTime)
+      }
       ForEach(lapTimes.indices.reversed(), id:\.self) { index in
-        HStack{
-          Text("Lap \(index + 1)")
-            .foregroundStyle(.blue)
-            .font(.title3)
-            .fontWeight(.medium)
-            .padding(.leading, 16)
-          
-          Spacer()
-          
-          Text("\(lapTimes[index])")
-            .foregroundStyle(.blue)
-            .font(.title3)
-            .fontWeight(.medium)
-            .padding(.trailing, 16)
-            .monospacedDigit()
-        }
-        
-        Divider()
-          .background(Color.red)
-          .padding(.leading, 16)
-          .padding(.bottom, 8)
+        LapListContentView(lapTimes: lapTimes, index: index, time: lapTimes[index])
       }
     }
   }
 }
 
 #Preview {
-  LapListView(lapTimes: [
+  LapListView(mode: .running, lapTimes: [
     "00:00:01",
     "00:00:02",
     "00:00:03",
@@ -52,5 +37,5 @@ struct LapListView: View{
     "00:00:08",
     "00:00:09",
     "00:00:10",
-], currentLapTime: "12:34:56")
+  ], currentLapTime: "12:34:56")
 }
